@@ -5,7 +5,8 @@ function display_help {
     echo "  --logs, -l     - utworzenie 100 plików logx.txt"
     echo "  --date, -d     - wyświetlenie dzisiejszej daty"
     echo "  --log x         - utworzenie x plików logx.txt (gdzie x = liczba od 1 do 100)"
-    echo "  --help, -h      - wyświetlenie pomocy"
+    echo "  --init         - klonowanie repozytorium do bieżącego katalogu i ustawienie PATH"
+    echo "  --help, -h     - wyświetlenie pomocy"
 }
 
 if [[ "$1" = "--logs" || "$1" = "-l" ]]; then
@@ -33,6 +34,12 @@ elif [[ "$1" == "--log" || "$1" == "-log" ]]; then
         display_help
         exit 1
     fi
+elif [[ "$1" = "--init" ]]; then
+    git clone https://github.com/artur54168/ZadanieLaboratoria4.git .
+
+    export PATH="$PATH:$(pwd)"
+
+    echo "Zainicjowano repozytorium i ustawiono PATH"
 elif [[ "$1" = "--help" || "$1" = "-h" ]]; then
     display_help
 else
