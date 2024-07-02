@@ -2,11 +2,12 @@
 
 function display_help {
     echo "Użycie: $0 opcja"
-    echo "  --logs, -l     - utworzenie 100 plików logx.txt"
-    echo "  --date, -d     - wyświetlenie dzisiejszej daty"
-    echo "  --log x         - utworzenie x plików logx.txt (gdzie x = liczba od 1 do 100)"
-    echo "  --init         - klonowanie repozytorium do bieżącego katalogu i ustawienie PATH"
-    echo "  --help, -h     - wyświetlenie pomocy"
+    echo "  --logs, -l      - utworzenie 100 plików logx.txt"
+    echo "  --date, -d      - wyświetlenie dzisiejszej daty"
+    echo "  --log x          - utworzenie x plików logx.txt (gdzie x = liczba od 1 do 100)"
+    echo "  --init          - klonowanie repozytorium do bieżącego katalogu i ustawienie PATH"
+    echo "  --error x, -e x - klonowanie repozytorium, ustawienie PATH i utworzenie errorx/errorx.txt"
+    echo "  --help, -h      - wyświetlenie pomocy"
 }
 
 if [[ "$1" = "--logs" || "$1" = "-l" ]]; then
@@ -40,6 +41,21 @@ elif [[ "$1" = "--init" ]]; then
     export PATH="$PATH:$(pwd)"
 
     echo "Zainicjowano repozytorium i ustawiono PATH"
+elif [[ "$1" == "--error" || "$1" == "-e" ]]; then
+    if [[ "$2" =~ ^[1-9][0-9]?$|^100$ ]]; then
+        git clone https://github.com/artur54168/ZadanieLaboratoria4.git .
+
+        export PATH="$PATH:$(pwd)"
+
+        error_dir="error$2"
+        mkdir -p "$error_dir"
+        echo "Plik error$2.txt" > "$error_dir/error$2.txt"
+        echo "Zainicjowano repozytorium, ustawiono PATH i utworzono $error_dir/error$2.txt"
+    else
+        echo "Nieprawidłowa liczba dla opcji --error/--e. Podaj liczbę od 1 do 100."
+        display_help
+        exit 1
+    fi
 elif [[ "$1" = "--help" || "$1" = "-h" ]]; then
     display_help
 else
