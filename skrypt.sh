@@ -2,10 +2,10 @@
 
 function display_help {
     echo "Użycie: $0 opcja"
-    echo "  --logs     - utworzenie 100 plików logx.txt"
-    echo "  --date     - wyświetlenie dzisiejszej daty"
+    echo "  --logs, -l     - utworzenie 100 plików logx.txt"
+    echo "  --date, -d     - wyświetlenie dzisiejszej daty"
     echo "  --log x         - utworzenie x plików logx.txt (gdzie x = liczba od 1 do 100)"
-    echo "  --help      - wyświetlenie pomocy"
+    echo "  --help, -h      - wyświetlenie pomocy"
 }
 
 if [[ "$1" = "--logs" || "$1" = "-l" ]]; then
